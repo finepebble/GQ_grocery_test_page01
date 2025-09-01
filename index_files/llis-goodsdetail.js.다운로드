@@ -1,0 +1,53 @@
+/*! llis-goodsdetail - 20250225 */
+
+(function () {
+  // loading="lazy"인 이미지는 lazyloaded 이벤트에서 처리
+  document.addEventListener('lazyloaded', function (event) {
+    const img = event.target; // 로드된 이미지
+
+    const checkImage = () => {
+      if (img.naturalWidth <= 1) {
+        img.style.width = '0%';
+        console.debug(`[lazy]이미지 숨김: ${img.src}`);
+      }
+    };
+
+    // 이미지가 이미 로드된 상태인지 확인
+    if (img.complete) {
+      checkImage();
+    } else {
+      img.onload = checkImage;
+    }
+  });
+
+  // loading="eager"인 이미지는 document.querySelectorAll('img')을 사용해 별도로 처리
+  document.querySelectorAll('img').forEach(img => {
+    function checkImage() {
+      if (img.naturalWidth <= 1) {
+        img.style.width = '0%';
+        console.debug('[eager]이미지 숨김: ' + img.src);
+      }
+    }
+
+    if (img.getAttribute('loading') === 'eager') {
+      if (img.complete) {
+        checkImage();
+      } else {
+        img.onload = checkImage;
+      }
+    }
+  });
+
+  window.onload = function () {
+    const vw = document.body.clientWidth;
+    document.querySelectorAll('iframe').forEach(el => {
+      if (el.width && !el.width.includes('%')) {
+        const ratio = vw / parseFloat(el.width);
+        if (el.height) {
+          el.height = parseFloat(el.height) * ratio;
+        }
+        el.width = vw;
+      }
+    });
+  }
+})();

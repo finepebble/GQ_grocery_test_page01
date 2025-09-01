@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- saved from url=(0116)https://llis-goodsdetail.lotteon.com/goodsdetail?model=itemdetail%2FLO%2F23%2F13%2F79%2F13%2F68%2FDSCRP_LO2313791368 -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>llis-goodsdetail</title>
+
+    
+    <meta name="viewport" content="user-scalable=yes,initial-scale=1,width=device-width">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no">
+
+    <script src="./pinch-zoom.umd.js.다운로드"></script>
+    <script src="./iframeResizer.contentWindow.min.js.다운로드"></script>
+    <script src="./ocr_function.js.다운로드"></script>
+<!--    <script src="https://static.lotteon.com/product/assets/js/lazysizes.min.js" defer></script>-->
+    <script src="./llis-goodsdetail.js.다운로드" defer=""></script>
+    <style>
+      html, body {
+        width: 100% !important;
+        height: auto !important;
+        margin: 0;
+        padding: 0;
+      }
+      table {
+        width: 100% !important;
+      }
+      h1, h2, h3, h4, h5 {
+        width: 100% !important;
+      }
+      div {
+        width: 100% !important;
+        height: auto !important;
+      }
+      video, table, h1, h2, h3, h4, h5 {
+        max-width: 100%;
+        vertical-align: top;
+      }
+      img, div {vertical-align: top; max-width: 100%;}
+      /*td img {*/
+      /*  max-width: 100vw;*/
+      /*}*/
+    </style>
+  </head>
+  <body style="user-select: none; -webkit-user-drag: none;">
+    <div id="llis-pinchzoom" data-iframe-height="" style="overflow: hidden;">
+      <div id="llis-root" style="transform-origin: 0px 0px; transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);"><img src="./한우 상세페이지 수정1.jpg" style="width: 100%; height: auto !important; pointer-events: none;" loading="eager"><img src="./선물세트아님.jpg" style="width: 100%; height: auto !important; pointer-events: none;" loading="eager"><img src="./한우 상세페이지 수정2.jpg" style="width: 100%; height: auto !important; pointer-events: none;" loading="lazy"><br>
+<img src="./한우 상세페이지 수정3.jpg" style="width: 100%; height: auto !important; pointer-events: none;" loading="lazy"></div>
+    </div>
+
+    <script>
+      const pinchWrapper = document.getElementById("llis-pinchzoom");
+      new PinchZoom(pinchWrapper, {
+        zoomMin: 1,
+        zoomMax: 3,
+        startZoom: 1,
+        bounce: true,
+      });
+    </script>
+    <script>
+      window.iFrameResizer = {
+        targetElement: document.querySelector('[data-iframe-height]'),
+        resizeByObserver: function () {
+          if ('parentIFrame' in window) {
+            parentIFrame.getPageInfo(function (pageInfo) {
+              const { targetElement } = window.iFrameResizer;
+              if (!targetElement) {
+                console.warn('### No target element found for resizing');
+                return;
+              }
+
+              const rect = targetElement.getBoundingClientRect();
+              const iframeHeight = Math.round(pageInfo.iframeHeight);
+              const contentHeight = Math.round(rect.height + rect.top);
+              if (Math.abs(iframeHeight - contentHeight) > 10) {
+                parentIFrame.size(contentHeight);
+              }
+            });
+          }
+        },
+        onMessage: function (message) {
+        },
+        onReady: function () {
+          window.iFrameResizer.resizeByObserver();
+        }
+      };
+
+      if ('ResizeObserver' in window) {
+        const { targetElement, resizeByObserver } = window.iFrameResizer;
+        if (targetElement) {
+          const resizeObserver = new ResizeObserver((entries) => {
+            entries.forEach(() => {
+              resizeByObserver();
+            });
+          });
+          resizeObserver.observe(targetElement);
+        } else {
+          console.warn('### No target element found for ResizeObserver');
+        }
+      }
+    </script>
+  
+
+<div style="clear: both; display: block; height: 0px;"></div></body></html>
